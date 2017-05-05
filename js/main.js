@@ -6,18 +6,18 @@ function setup() {
     noLoop();
     background(pixel.background || '');
 
-    for (var n = 0; n < round(pixel.graph / 2); n++) {
+    for (var n = 0; n < round(pixel.size / 2); n++) {
 
         pixel.data = [];
-        for (i = 0; i < pixel.graph; i++) {
+        for (i = 0; i < pixel.size; i++) {
             pixel.data.push(round(random(0, 1)));
         }
         pixel.map.push(pixel.data);
 
     }
 
-    for (i = 0; i < pixel.graph; i++) {
-        pixel.map.push(pixel.map[pixel.graph % 2 == 0 ? round(pixel.graph / 2) - i : round((pixel.graph / 2) - 2) - i]);
+    for (i = 0; i < pixel.size; i++) {
+        pixel.map.push(pixel.map[pixel.size % 2 == 0 ? round(pixel.size / 2) - i : round((pixel.size / 2) - 2) - i]);
     }
 }
 
@@ -31,12 +31,12 @@ function draw() {
         for (x in pixel.map[i]) {
 
             if (pixel.map[i][x] == 1) {
-                rect(pixel.x * pixel.row + (pixel.margin * (pixel.graph / 2)), pixel.y * pixel.col + (pixel.margin * (pixel.graph / 2)), pixel.x, pixel.y);
+                rect(pixel.x * pixel.row + (pixel.margin * (pixel.size / 2)), pixel.y * pixel.col + (pixel.margin * (pixel.size / 2)), pixel.x, pixel.y);
             }
 
             pixel.col++;
 
-            if (pixel.col >= pixel.graph && pixel.row < (pixel.graph - 1)) {
+            if (pixel.col >= pixel.size && pixel.row < (pixel.size - 1)) {
                 pixel.col = 0;
                 pixel.row++;
             }
