@@ -1,6 +1,13 @@
-# simple-identicons
+# Simple JS Identicons
 <p align="center">
-  <img src="http://i.imgur.com/mRMwKN2.png" width="250"/>
+  <img src="http://i.imgur.com/e3VkIRB.png" width="250"/>
 </p>
 <br>
-<p>Simple 5x5 (By default, can be adjusted in pixel.js by changing this.graph) pixel sprites which are randomly generated, made with p5.js.</p>
+<p align="center">Simple dynamically sized identicons which are randomly generated, made with p5.js</p>
+
+## options
+* **Size** - Number of "pixels" per column/row (canvas.width/canvas.height / size)
+* **Margin** - Measured in pixels, not decimal fraction
+* **Background** - Background color of the sprite
+* **Fill** - Fill color of each pixel
+* **Stroke** - Stroke color of each pixel

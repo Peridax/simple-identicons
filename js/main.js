@@ -1,49 +1,49 @@
-var pixel, primary, pixelMap, pixelData, i, x;
+var pixel;
 
 function setup() {
     createCanvas(500, 500);
-    background(255);
-    noLoop();
     pixel = new Pixel(canvas);
-    pixelMap = [];
-    primary = color(round(random(16, 255)), round(random(16, 255)), round(random(16, 255)));
+    noLoop();
+    background(pixel.background || '');
 
-    for (var n = 0; n < round(pixel.graph / 2); n++) {
+    for (var n = 0; n < round(pixel.size / 2); n++) {
 
-        pixelData = [];
-        for (i = 0; i < pixel.graph; i++) {
-            pixelData.push(round(random(0, 1)));
+        pixel.data = [];
+        for (i = 0; i < pixel.size; i++) {
+            pixel.data.push(round(random(0, 1)));
         }
-        pixelMap.push(pixelData);
+        pixel.map.push(pixel.data);
 
     }
 
-    for (i = 0; i < pixel.graph; i++) {
-        pixelMap.push(pixelMap[pixel.graph % 2 == 0 ? round(pixel.graph / 2) - i : round((pixel.graph / 2) - 2) - i]);
+    for (i = 0; i < pixel.size; i++) {
+        pixel.map.push(pixel.map[pixel.size % 2 == 0 ? round(pixel.size / 2) - i : round((pixel.size / 2) - 2) - i]);
     }
 }
 
 function draw() {
 
-    fill(primary);
-    stroke(primary);
+    fill(pixel.fill);
+    stroke(pixel.stroke);
     smooth();
 
-    for (i in pixelMap) {
-        for (x in pixelMap[i]) {
+    for (i in pixel.map) {
+        for (x in pixel.map[i]) {
 
-            if (pixelMap[i][x] == 1) {
-                rect(pixel.x * pixel.row, pixel.y * pixel.col, pixel.x, pixel.y);
+            if (pixel.map[i][x] == 1) {
+                rect(pixel.x * pixel.row + (pixel.margin * (pixel.size / 2)), pixel.y * pixel.col + (pixel.margin * (pixel.size / 2)), pixel.x, pixel.y);
             }
 
             pixel.col++;
 
-            if (pixel.col >= pixel.graph && pixel.row < (pixel.graph - 1)) {
+            if (pixel.col >= pixel.size && pixel.row < (pixel.size - 1)) {
                 pixel.col = 0;
                 pixel.row++;
             }
 
         }
     }
+
+    document.body.innerHTML = '<img src="' + canvas.toDataURL("image/png") + '">';
 
 }
