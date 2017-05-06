@@ -16,22 +16,26 @@ function setup() {
 
     }
 
-    for (i = 0; i < pixel.size; i++) {
-        pixel.map.push(pixel.map[pixel.size % 2 == 0 ? round(pixel.size / 2) - i : round((pixel.size / 2) - 2) - i]);
+    for (i = 0; i < (floor(pixel.size / 2)); i++) {
+        pixel.map.push(pixel.map[pixel.size % 2 == 0 ? round(pixel.size / 2 - 1) - i : round((pixel.size / 2) - 2) - i]);
     }
 }
 
 function draw() {
 
-    fill(pixel.fill);
-    stroke(pixel.stroke);
+    fill(pixel.color);
+    noStroke();
     smooth();
+
+    if (pixel.size < 6 || pixel.size > 9) {
+        throw new Error('Pixel size must be bigger than 6 and less than 9');
+    }
 
     for (i in pixel.map) {
         for (x in pixel.map[i]) {
 
             if (pixel.map[i][x] == 1) {
-                rect(pixel.x * pixel.row + (pixel.margin * (pixel.size / 2)), pixel.y * pixel.col + (pixel.margin * (pixel.size / 2)), pixel.x, pixel.y);
+                rect(pixel.x * pixel.row + (pixel.mcalc * (pixel.size / 2)), pixel.y * pixel.col + (pixel.mcalc * (pixel.size / 2)), pixel.x, pixel.y);
             }
 
             pixel.col++;
